@@ -1,0 +1,8 @@
+
+#
+# GitRemote
+# Dict of remote name and host for all remote
+#
+
+origin:
+  - git@github.com:mardix/gitremote.git
