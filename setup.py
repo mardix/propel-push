@@ -1,7 +1,7 @@
 """
 GitRemote
 
-A simple to add git remotes effortlessly
+A simple tool to add git remotes effortlessly
 
 1. pip install gitremote
 2. gitremote -i | gitremote --init
