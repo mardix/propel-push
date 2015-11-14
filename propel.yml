@@ -1,0 +1,9 @@
+
+#
+# Propel-Push
+# Dict of git-remotes name and host for all remote
+#
+
+git-remotes:
+  origin:
+    - git@github.com:mardix/propel-push.git

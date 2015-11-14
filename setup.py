@@ -1,21 +1,15 @@
 """
-GitRemote
+propel-push
 
-A simple tool to add git remotes effortlessly
+extension that allows you to push to
+git remotes specified in `propel.yml`, which is also the config file to deploy with Propel.
 
-1. pip install gitremote
-2. gitremote -i | gitremote --init
-    It will create gitremote.yml
-    Add remote and host
-3. gitremote -r | gitremote --reset
-
-That's it
 """
 
 from setuptools import setup
-import gitremote
+import propel_push
 
-PACKAGE = gitremote
+PACKAGE = propel_push
 
 setup(
     name=PACKAGE.__NAME__,
@@ -23,12 +17,12 @@ setup(
     license="MIT",
     author="Mardix",
     author_email="mardix@pylot.io",
-    description="Simple tool to add git remotes effortlessly",
+    description=__doc__,
     long_description=__doc__,
-    url='http://github.com/mardix/gitremote/',
-    download_url='http://github.com/mardix/gitremote/tarball/master',
-    py_modules=['gitremote'],
-    entry_points=dict(console_scripts=['gitremote=gitremote:cli']),
+    url='http://github.com/mardix/propel-push/',
+    download_url='http://github.com/mardix/propel-push/tarball/master',
+    py_modules=['propel_push'],
+    entry_points=dict(console_scripts=['propel-push=propel_push:cli']),
     keywords=['git remote'],
     platforms='any',
     install_requires=['pyyaml==3.11'],
