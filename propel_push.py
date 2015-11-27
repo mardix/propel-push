@@ -6,7 +6,7 @@ try:
 except ImportError as ex:
     print("PyYaml is missing. pip install pyyaml")
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __NAME__ = "Propel-Push"
 
 CWD = os.getcwd()
@@ -25,8 +25,9 @@ def git_remotes_conf(f):
         conf = yaml.load(yfile)
         return conf["git-remotes"] if "git-remotes" in conf else {}
 
-def gen_git_push_remote(name):
-    return "git push %s master;" % name
+def gen_git_push_remote(name, force=False):
+    force = " -f" if force else ""
+    return "git push %s %s master;" % (force, name)
 
 def gen_git_remove_remote(name):
     return "git remote remove %s;" % name
@@ -72,10 +73,15 @@ def cli():
                             help="Persist the remotes into the git config. "
                                  "ie: [ propel-push --reset ]",
                             action="store_true")
+        parser.add_argument("-f", "--force",
+                            help="To force the push "
+                                 "ie: [ propel-push -a -f ]",
+                            action="store_true")
         arg = parser.parse_args()
 
         print("%s %s" % (__NAME__, __version__))
 
+        force = arg.force
         if arg.all:
             print("Push to all remotes")
             conf = git_remotes_conf(conf_file)
@@ -84,7 +90,7 @@ def cli():
             remotes = list(set(l))
             name = "propel_push__all"
             cmd = gen_git_remote_command(name, remotes)
-            cmd += gen_git_push_remote(name)
+            cmd += gen_git_push_remote(name, force)
             cmd += gen_git_remove_remote(name)
             run("cd %s; %s" % (CWD, cmd))
         
@@ -95,7 +101,7 @@ def cli():
             remotes = conf[name]
             name = "propel_push__%s" % name
             cmd = gen_git_remote_command(name, remotes)
-            cmd += gen_git_push_remote(name)
+            cmd += gen_git_push_remote(name, force)
             cmd += gen_git_remove_remote(name)
             run("cd %s; %s" % (CWD, cmd))
 
