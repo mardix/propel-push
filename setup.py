@@ -25,7 +25,7 @@ setup(
     entry_points=dict(console_scripts=['propel-push=propel_push:cli']),
     keywords=['git remote'],
     platforms='any',
-    install_requires=['pyyaml==3.11'],
+    install_requires=['pyyaml==5.1'],
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
